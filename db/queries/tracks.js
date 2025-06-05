@@ -8,3 +8,17 @@ export async function addTracks({ name, duration }) {
   } = await db.query(SQL, [name, duration]);
   return track;
 }
+
+export async function getTracks() {
+  const SQL = `SELECT * FROM tracks`;
+  const { rows: tracks } = await db.query(SQL);
+  return tracks;
+}
+
+export async function getTrackById(id) {
+  const SQL = `SELECT * FROM tracks WHERE id = $1`;
+  const {
+    rows: [track],
+  } = await db.query(SQL, [id]);
+  return track;
+}
